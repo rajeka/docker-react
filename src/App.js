@@ -15,7 +15,7 @@ function App() {
           target="_blank"
           rel="noopener noreferrer"
         >
-          Learn React
+          Learning Docker with compose to deploy React App!
         </a>
       </header>
     </div>
