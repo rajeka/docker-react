@@ -2,14 +2,28 @@ language: generic
 
 # super user permision
 sudo: required
-
+#need  a copy of docker. 
 services:
   - docker
-#need to occure before deploy or un our test
+#need  a copy of docker. to occure before deploy or un our test
 # tag to avoid manual copy id github username/name can use any name for tagging.
 
+# build our docker build tag is used inside of travis
 before_install:
   - docker build -t rajeka/docker-react -f Dockerfile.dev .
 
+# image rajeka/docker-react
 script:
   - docker run -e CI=true rajeka/docker-react npm run test
+
+deploy:
+  provider: elasticbeanstalk
+  region: 'us-west-2'
+  app: 'docker'
+  env: 'Docker-env'
+  bucket_name: 'elasticbeanstalk-us-west-2-'
+  bucket_path: 'docker-react'
+  on:
+    branch: main
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key: '$AWS_SECRET_KEY'

@@ -13,6 +13,8 @@ RUN npm run build
 
 # run phase  in app/build/
 FROM nginx
+# expose port aws beanstalk starts docker file look for Expose port
+EXPOSE 80
 # from where to 
 COPY --from=builder /app/build /usr/share/nginx/html
 
